@@ -1,40 +1,72 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import {
   SunIcon,
   MoonIcon,
   BellIcon,
   CalendarIcon,
+  ChevronDownIcon,
 } from '@heroicons/react/24/outline';
 import CustomDropdown from './CustomDropdown';
 import PulseDrawer from './PulseDrawer';
 import NotificationsPanel from './NotificationsPanel';
 import Logo from './Logo';
+import DateRangeSelector from './DateRangeSelector';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  selectedLocation: string;
+  onLocationChange: (location: string) => void;
+  selectedDateRange: string;
+  onDateRangeChange: (range: { start: Date; end: Date }) => void;
+}
+
+interface Option {
+  id: string;
+  value: string;
+  label: string;
+}
+
+const Header: React.FC<HeaderProps> = ({
+  selectedLocation,
+  onLocationChange,
+  selectedDateRange,
+  onDateRangeChange,
+}) => {
   const { theme, toggleTheme } = useTheme();
   const [showPulseDrawer, setShowPulseDrawer] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const [showDateSelector, setShowDateSelector] = useState(false);
 
-  const locations = [
-    { id: '0', value: 'all', label: 'All Locations' },
-    { id: '1', value: 'midtown', label: 'Midtown Clinic – Atlanta, GA' },
-    { id: '2', value: 'downtown', label: 'Downtown Clinic – Atlanta, GA' },
-    { id: '3', value: 'buckhead', label: 'Buckhead Clinic – Atlanta, GA' },
-    { id: '4', value: 'jacksonville', label: 'Jacksonville Clinic – FL' },
-    { id: '5', value: 'orlando', label: 'Orlando Clinic – FL' },
+  const locations: Option[] = [
+    { id: 'all', value: 'All Locations', label: 'All Locations' },
+    { id: 'midtown', value: 'Midtown Clinic - Atlanta, GA', label: 'Midtown Clinic - Atlanta, GA' },
+    { id: 'downtown', value: 'Downtown Clinic - Atlanta, GA', label: 'Downtown Clinic - Atlanta, GA' },
+    { id: 'northside', value: 'Northside Clinic - Atlanta, GA', label: 'Northside Clinic - Atlanta, GA' },
+    { id: 'southside', value: 'Southside Clinic - Atlanta, GA', label: 'Southside Clinic - Atlanta, GA' }
   ];
 
-  const dateRanges = [
-    { id: '1', value: 'today', label: 'Today' },
-    { id: '2', value: 'yesterday', label: 'Yesterday' },
-    { id: '3', value: 'week', label: 'Last 7 Days' },
-    { id: '4', value: 'month', label: 'Last 30 Days' },
-    { id: '5', value: 'year', label: 'This Year' },
-  ];
+  useEffect(() => {
+    // Set default location to All Locations
+    if (!selectedLocation) {
+      onLocationChange('All Locations');
+    }
+  }, []);
 
-  const [selectedLocation, setSelectedLocation] = useState('all');
-  const [selectedDateRange, setSelectedDateRange] = useState('yesterday');
+  const formatDateRange = (range: { start: Date; end: Date }) => {
+    const formatDate = (date: Date) => {
+      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    };
+    return `${formatDate(range.start)} - ${formatDate(range.end)}`;
+  };
+
+  const handleDateSelect = (range: { start: Date; end: Date }) => {
+    onDateRangeChange(range);
+    setShowDateSelector(false);
+  };
+
+  const displayDateRange = selectedDateRange && typeof selectedDateRange === 'object' 
+    ? formatDateRange(selectedDateRange) 
+    : 'Yesterday';
 
   return (
     <>
@@ -50,19 +82,27 @@ const Header: React.FC = () => {
             <CustomDropdown
               options={locations}
               value={selectedLocation}
-              onChange={setSelectedLocation}
+              onChange={onLocationChange}
               minWidth="220px"
               showLocationIcons
               className="px-3"
             />
           </div>
-          <div className="relative flex items-center">
-            <CustomDropdown
-              options={dateRanges}
-              value={selectedDateRange}
-              onChange={setSelectedDateRange}
-              minWidth="140px"
-              icon={<CalendarIcon className="h-4 w-4 text-gray-400" />}
+          <div className="relative">
+            <button
+              onClick={() => setShowDateSelector(!showDateSelector)}
+              className="flex items-center space-x-2 rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
+            >
+              <CalendarIcon className="h-5 w-5 text-gray-400" />
+              <span>{displayDateRange}</span>
+              <ChevronDownIcon className="ml-2 h-5 w-5 text-gray-400" />
+            </button>
+
+            <DateRangeSelector
+              isOpen={showDateSelector}
+              onClose={() => setShowDateSelector(false)}
+              onSelect={handleDateSelect}
+              defaultView="yesterday"
             />
           </div>
         </div>

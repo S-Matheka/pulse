@@ -211,7 +211,7 @@ const CallMetricsDrilldown: React.FC<DrilldownProps> = ({ isOpen, onClose, metri
       onClose={onClose}
       className="relative z-50"
     >
-      <div className="fixed inset-0 bg-black/30 backdrop-blur-sm" aria-hidden="true" />
+      <div className="fixed inset-0 bg-black/30 backdrop-blur-md" aria-hidden="true" />
 
       <div className="fixed inset-0 flex items-center justify-center p-4">
         <Dialog.Panel className={`bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full ${isAbandonedCalls ? 'max-w-2xl' : 'max-w-4xl'}`}>

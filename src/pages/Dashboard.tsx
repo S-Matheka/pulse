@@ -44,8 +44,8 @@ const Dashboard: React.FC = () => {
   // Get user's first name
   const getFirstName = () => {
     if (!user) return '';
-    // Extract first name from email (before the @ symbol and capitalize first letter)
-    const emailName = user.email.split('@')[0];
+    // Extract first name from email (before the @ symbol and any dots, capitalize first letter)
+    const emailName = user.email.split('@')[0].split('.')[0];
     return emailName.charAt(0).toUpperCase() + emailName.slice(1);
   };
 
