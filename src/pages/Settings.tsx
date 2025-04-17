@@ -4,7 +4,6 @@ import {
   BellIcon,
   UserIcon,
   ShieldCheckIcon,
-  GlobeAltIcon,
   KeyIcon,
 } from '@heroicons/react/24/outline';
 

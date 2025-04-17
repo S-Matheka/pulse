@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import {
   XMarkIcon,
   PlayCircleIcon,
-  DocumentTextIcon,
-  UserGroupIcon,
-  CalendarDaysIcon,
   ArrowTrendingUpIcon,
 } from '@heroicons/react/24/outline';
 import { StaffIssue } from './StaffIssuesMonitor';
@@ -62,43 +59,11 @@ const mockCallData = [
   { id: 3, patientId: 'P-9012', time: '02:45 PM', agent: 'Lisa M.', tag: 'missed follow-up', outcome: 'Voicemail left' },
 ];
 
-const mockNurseData = {
-  checkInTimes: [
-    { date: '2024-01-01', avgTime: 15 },
-    { date: '2024-01-02', avgTime: 18 },
-    { date: '2024-01-03', avgTime: 20 },
-    // Add more data points
-  ],
-  shiftCoverage: [
-    { shift: 'Morning', coverage: 80 },
-    { shift: 'Afternoon', coverage: 60 },
-    { shift: 'Evening', coverage: 40 },
-  ],
-};
-
 const mockCommunicationFeedback = [
   { id: 1, quote: "Nurse didn't explain medication changes clearly", source: "Call transcript" },
   { id: 2, quote: "Instructions were too technical to understand", source: "Patient feedback" },
   { id: 3, quote: "Needed to ask multiple times for clarification", source: "Survey response" },
 ];
-
-// Add mock call details
-const mockCallDetails = {
-  id: 'call-123',
-  timestamp: '2024-03-20T10:30:00Z',
-  duration: '5m 23s',
-  summary: 'Patient expressed frustration about long wait times and rude behavior from front desk staff.',
-  agent: 'Sarah Johnson',
-  customerId: 'CUST-456',
-  customerName: 'John Smith',
-  phoneNumber: '(555) 123-4567',
-  shouldAnonymize: true,
-  isCrmVerified: true,
-  reasonForReview: 'Negative call sentiment',
-  reasonSeverity: 'negative' as const,
-  recordingUrl: '/recordings/call-123.mp3',
-  transcriptUrl: '/transcripts/call-123.txt'
-};
 
 // Mock data for front desk metrics
 const mockFrontDeskData = {

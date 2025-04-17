@@ -22,36 +22,46 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   return <>{children}</>;
 };
 
+const AppContent: React.FC = () => {
+  const { user } = useUser();
+
+  return (
+    <Routes>
+      <Route path="/login" element={
+        user?.isAuthenticated ? <Navigate to="/" replace /> : <Login />
+      } />
+      <Route path="/" element={
+        <ProtectedRoute>
+          <Layout>
+            <Dashboard />
+          </Layout>
+        </ProtectedRoute>
+      } />
+      <Route path="/locations" element={
+        <ProtectedRoute>
+          <Layout>
+            <LocationsOverview />
+          </Layout>
+        </ProtectedRoute>
+      } />
+      <Route path="/location/:id" element={
+        <ProtectedRoute>
+          <Layout>
+            <LocationDetails />
+          </Layout>
+        </ProtectedRoute>
+      } />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  );
+};
+
 const App: React.FC = () => {
   return (
     <ThemeProvider>
       <UserProvider>
         <Router>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/" element={
-              <ProtectedRoute>
-                <Layout>
-                  <Dashboard />
-                </Layout>
-              </ProtectedRoute>
-            } />
-            <Route path="/locations" element={
-              <ProtectedRoute>
-                <Layout>
-                  <LocationsOverview />
-                </Layout>
-              </ProtectedRoute>
-            } />
-            <Route path="/location/:id" element={
-              <ProtectedRoute>
-                <Layout>
-                  <LocationDetails />
-                </Layout>
-              </ProtectedRoute>
-            } />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
+          <AppContent />
         </Router>
       </UserProvider>
     </ThemeProvider>

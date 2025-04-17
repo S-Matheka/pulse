@@ -3,16 +3,12 @@ import { Dialog } from '@headlessui/react';
 import {
   PhoneIcon,
   ClockIcon,
-  ExclamationCircleIcon,
   XMarkIcon,
-  UserGroupIcon,
-  DocumentTextIcon,
-  CalendarIcon,
+  UserCircleIcon,
+  ChatBubbleLeftRightIcon,
   ArrowTrendingUpIcon,
   ArrowTrendingDownIcon,
-  CheckCircleIcon,
-  UserCircleIcon,
-  ChatBubbleLeftRightIcon
+  CheckCircleIcon
 } from '@heroicons/react/24/outline';
 
 interface ServiceLineMetrics {

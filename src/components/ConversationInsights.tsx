@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowTrendingUpIcon, ArrowTrendingDownIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
+import { ChevronRightIcon } from '@heroicons/react/24/outline';
 import { CheckCircleIcon, ExclamationTriangleIcon } from '@heroicons/react/24/solid';
 
 interface InsightTrend {

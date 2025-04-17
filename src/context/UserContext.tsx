@@ -2,13 +2,15 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface User {
   email: string;
-  firstName: string;
+  name: string;
+  role: string;
   isAuthenticated: boolean;
+  firstName: string;
 }
 
 interface UserContextType {
   user: User | null;
-  login: (email: string, password: string) => Promise<boolean>;
+  login: (email: string) => Promise<boolean>;
   logout: () => void;
 }
 
@@ -17,27 +19,20 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
 
-  const login = async (email: string, password: string): Promise<boolean> => {
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return false;
-    }
-
-    // Extract first name from email (before the @ symbol and first dot)
-    const firstName = email.split('@')[0].split('.')[0];
-    const formattedFirstName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
-
-    // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    setUser({
-      email,
-      firstName: formattedFirstName,
-      isAuthenticated: true
+  const login = async (email: string): Promise<boolean> => {
+    // Simulate API call
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        setUser({
+          email,
+          name: 'Admin User',
+          role: 'admin',
+          isAuthenticated: true,
+          firstName: 'Admin'
+        });
+        resolve(true);
+      }, 1000);
     });
-
-    return true;
   };
 
   const logout = () => {

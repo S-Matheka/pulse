@@ -19,14 +19,14 @@ const Login: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const success = await login(email, password);
+      const success = await login(email);
       if (success) {
         navigate('/');
       } else {
-        setError('Please enter a valid email address');
+        setError('Invalid credentials');
       }
     } catch (err) {
-      setError('An error occurred. Please try again.');
+      setError('An error occurred during login');
     } finally {
       setIsLoading(false);
     }

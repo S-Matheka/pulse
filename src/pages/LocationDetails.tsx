@@ -1,24 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
-  BuildingOfficeIcon,
   ArrowLeftIcon,
   PhoneIcon,
   StarIcon,
   UserGroupIcon,
-  ExclamationTriangleIcon,
   ClockIcon,
   ArrowTrendingUpIcon,
   ArrowTrendingDownIcon,
 } from '@heroicons/react/24/outline';
 import { StaffIssue } from '../components/StaffIssuesMonitor';
-import ReputationOverview from '../components/ReputationOverview';
-import PulseComparison from '../components/PulseComparison';
-import ConversationInsights from '../components/ConversationInsights';
-import ComplianceAlerts from '../components/ComplianceAlerts';
-import EscalatingRiskPatterns from '../components/EscalatingRiskPatterns';
 import StaffIssuesMonitor from '../components/StaffIssuesMonitor';
-import OperationalRiskFeed from '../components/OperationalRiskFeed';
 
 // Mock data for locations (same as in LocationsOverview)
 const locations = [

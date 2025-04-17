@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   XMarkIcon, 
   SpeakerWaveIcon, 
@@ -35,64 +35,16 @@ interface CallDetailsModalProps {
   };
 }
 
-// Mock transcript data - in real app this would come from the call prop
-const mockTranscript: CallTranscriptLine[] = [
-  {
-    timestamp: '0:00',
-    speaker: 'Agent',
-    text: 'Thank you for calling Midtown Medical Center, this is Sarah speaking. How may I assist you today?'
-  },
-  {
-    timestamp: '0:20',
-    speaker: 'Patient',
-    text: "Hi, I've been waiting for a callback about my prescription refill request. I submitted it yesterday morning and haven't heard back."
-  },
-  {
-    timestamp: '0:40',
-    speaker: 'Agent',
-    text: 'I apologize for the delay. Let me look up your prescription request right away.'
-  },
-  {
-    timestamp: '1:00',
-    speaker: 'Patient',
-    text: "It's really frustrating because I'm almost out of my medication and I need it daily. I can't afford to wait much longer."
-  },
-  {
-    timestamp: '1:25',
-    speaker: 'Agent',
-    text: "I understand your concern about the medication. I see your refill request here, but it's showing it needs provider approval. Let me escalate this to our nursing team right now."
-  },
-  {
-    timestamp: '1:55',
-    speaker: 'Patient',
-    text: "Thank you, but this keeps happening. Every month I have to chase down my refills. There has to be a better way."
-  },
-  {
-    timestamp: '2:15',
-    speaker: 'Agent',
-    text: "I hear your frustration with the refill process. I'm going to make a note in your chart about these recurring delays and recommend setting up automatic refills to prevent this in the future."
-  },
-  {
-    timestamp: '2:35',
-    speaker: 'Patient',
-    text: "That would be helpful. How long until someone calls me back about today's refill?"
-  },
-  {
-    timestamp: '2:50',
-    speaker: 'Agent',
-    text: "I'm marking this as urgent due to your supply situation. You should receive a call back within the next hour. Is there a specific phone number you prefer we use?"
-  }
-];
-
 const CallDetailsModal: React.FC<CallDetailsModalProps> = ({
   isOpen,
   onClose,
   call
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
+  const [currentTime] = useState(0);
   const [volume, setVolume] = useState(75);
   const [showTranscript, setShowTranscript] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   if (!isOpen) return null;
 
@@ -129,6 +81,17 @@ const CallDetailsModal: React.FC<CallDetailsModalProps> = ({
   };
 
   const transcript = call.transcript || (call.agent ? getTranscriptByAgent(call.agent) : []);
+
+  const handlePlayPause = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
 
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-75 dark:bg-opacity-90 flex items-center justify-center z-50">
@@ -195,7 +158,7 @@ const CallDetailsModal: React.FC<CallDetailsModalProps> = ({
                 {/* Play Button */}
                 <button 
                   className="w-14 h-14 rounded-full bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 flex items-center justify-center transition-colors shadow-lg"
-                  onClick={() => setIsPlaying(!isPlaying)}
+                  onClick={handlePlayPause}
                 >
                   {isPlaying ? (
                     <div className="w-5 h-5 flex items-center justify-center">
