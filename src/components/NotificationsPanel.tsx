@@ -31,7 +31,7 @@ const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, onClose
     {
       id: '1',
       title: 'Staff Shortage Alert',
-      description: 'Front desk staffing at Southside Community Health below 75% capacity',
+      description: 'Front desk staffing at Southside Clinic - Atlanta, GA below 75% capacity',
       priority: 'High',
       icon: UserGroupIcon,
       timestamp: 'Just now',
@@ -41,7 +41,7 @@ const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, onClose
     {
       id: '2',
       title: 'Call Volume Spike',
-      description: 'Incoming calls increased by 45% in the last hour at Downtown Clinic',
+      description: 'Incoming calls increased by 45% in the last hour at Downtown Clinic - Atlanta, GA',
       priority: 'High',
       icon: PhoneIcon,
       timestamp: '10m ago',
@@ -51,7 +51,7 @@ const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, onClose
     {
       id: '3',
       title: 'Patient Wait Time Alert',
-      description: 'Average wait time exceeds 20 minutes at Main Street Location',
+      description: 'Average wait time exceeds 20 minutes at Midtown Clinic - Atlanta, GA',
       priority: 'High',
       icon: ClockIcon,
       timestamp: '15m ago',
@@ -61,7 +61,7 @@ const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, onClose
     {
       id: '4',
       title: 'Compliance Warning',
-      description: 'Required patient documentation missing in 3 recent appointments',
+      description: 'Required patient documentation missing in 3 recent appointments at Northside Clinic - Atlanta, GA',
       priority: 'High',
       icon: ExclamationCircleIcon,
       timestamp: '32m ago',
@@ -71,7 +71,7 @@ const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, onClose
     {
       id: '5',
       title: 'Reputation Alert',
-      description: 'New negative reviews detected for Downtown Clinic location',
+      description: 'New negative reviews detected for Downtown Clinic - Atlanta, GA location',
       priority: 'Medium',
       icon: ChartBarIcon,
       timestamp: '1h ago',

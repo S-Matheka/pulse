@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
+import { useTheme } from '../context/ThemeContext';
 import { EnvelopeIcon, LockClosedIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 
 const Login: React.FC = () => {
@@ -11,6 +12,7 @@ const Login: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [useUsername, setUseUsername] = useState(false);
   const { login } = useUser();
+  const { theme } = useTheme();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -39,8 +41,8 @@ const Login: React.FC = () => {
         <div className="mx-auto w-full max-w-sm lg:w-96">
           <div className="flex justify-center mb-10">
             <img
-              src="/assets/logos/dark/logo.svg"
-              alt="Healthcare Pulse"
+              src={theme === 'dark' ? '/assets/logos/dark/logo.svg' : '/assets/logos/light/logo.svg'}
+              alt="Creo Solutions"
               className="h-16 w-auto"
             />
           </div>
