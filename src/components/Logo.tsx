@@ -1,17 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 
 const Logo: React.FC = () => {
   const { theme } = useTheme();
   
   return (
-    <a href="/dashboard" className="flex items-center px-4 h-[65px]">
+    <Link to="/" className="flex items-center justify-start px-4 py-5">
       <img
-        src={`/assets/logos/${theme}/logo.svg`}
-        alt="Healthcare Pulse"
-        className="h-10 max-w-[180px] object-contain transition-opacity duration-300"
+        src={theme === 'dark' ? '/assets/logos/dark/logo.svg' : '/assets/logos/light/logo.svg'}
+        alt="Creo Solutions"
+        className="h-8 w-auto object-contain"
       />
-    </a>
+    </Link>
   );
 };
 

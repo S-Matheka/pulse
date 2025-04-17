@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import {
   SunIcon,
@@ -9,8 +9,9 @@ import {
 import CustomDropdown from './CustomDropdown';
 import PulseDrawer from './PulseDrawer';
 import NotificationsPanel from './NotificationsPanel';
+import Logo from './Logo';
 
-const Header = () => {
+const Header: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   const [showPulseDrawer, setShowPulseDrawer] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
@@ -37,8 +38,13 @@ const Header = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-gray-200 bg-white px-4 dark:border-gray-700 dark:bg-gray-800">
-        {/* Left side - Location and Date Range */}
+      <header className="sticky top-0 z-30 flex h-16 w-full items-center border-b border-gray-200 bg-white px-4 dark:border-gray-700 dark:bg-gray-800">
+        {/* Logo */}
+        <div className="flex-shrink-0 w-64 -ml-4">
+          <Logo />
+        </div>
+
+        {/* Location and Date Range */}
         <div className="flex items-center space-x-2">
           <div className="relative flex items-center">
             <CustomDropdown
@@ -62,7 +68,7 @@ const Header = () => {
         </div>
 
         {/* Right side - Actions */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 ml-auto">
           <button
             onClick={toggleTheme}
             className="rounded-lg p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"

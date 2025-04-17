@@ -1,12 +1,10 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
-import Logo from './Logo';
 import {
   HomeIcon,
   MapPinIcon,
   LightBulbIcon,
-  ChartBarIcon,
   Cog6ToothIcon,
   QuestionMarkCircleIcon,
   BookOpenIcon,
@@ -38,18 +36,17 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ icon: Icon, label, to, isActi
 );
 
 const Sidebar: React.FC = () => {
-  const location = useLocation();
   const { user, logout } = useUser();
-  
-  // Get the display name and avatar initial
+  const location = useLocation();
+
+  if (!user) return null;
+
   const getDisplayName = () => {
-    if (!user) return 'Guest';
-    return user.firstName || user.email.split('@')[0];
+    return user.name || user.email.split('@')[0];
   };
 
-  const getAvatarInitial = () => {
-    if (!user) return 'G';
-    return user.firstName ? user.firstName[0].toUpperCase() : user.email[0].toUpperCase();
+  const getAvatarText = () => {
+    return user.name ? user.name[0].toUpperCase() : user.email[0].toUpperCase();
   };
 
   const mainNavigation = [
@@ -72,12 +69,7 @@ const Sidebar: React.FC = () => {
   };
 
   return (
-    <div className="w-64 h-screen bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col">
-      {/* Header */}
-      <div className="border-b border-gray-200 dark:border-gray-800">
-        <Logo />
-      </div>
-
+    <div className="w-64 h-[calc(100vh-64px)] bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col">
       {/* Main Navigation */}
       <div className="flex-1 overflow-y-auto px-3 py-4">
         <nav className="space-y-1">
@@ -116,7 +108,7 @@ const Sidebar: React.FC = () => {
           <div className="relative h-8 w-8 rounded bg-blue-100 dark:bg-blue-900 flex items-center justify-center overflow-hidden">
             <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-blue-500"></div>
             <span className="text-sm font-semibold text-blue-700 dark:text-blue-300 ml-1">
-              {getAvatarInitial()}
+              {getAvatarText()}
             </span>
           </div>
           <div className="ml-3">
