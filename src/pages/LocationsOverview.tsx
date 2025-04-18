@@ -29,7 +29,7 @@ const locations = [
       google: 4.5,
       yelp: 4.2,
       facebook: 4.4,
-      recentReviews: 19,
+      recentTrend: 'up',
     },
     staffRiskLevel: 'low',
     alerts: 2,
@@ -49,7 +49,7 @@ const locations = [
       google: 4.0,
       yelp: 3.7,
       facebook: 3.9,
-      recentReviews: -5,
+      recentTrend: 'down',
     },
     staffRiskLevel: 'high',
     alerts: 5,
@@ -69,7 +69,7 @@ const locations = [
       google: 4.7,
       yelp: 4.4,
       facebook: 4.6,
-      recentReviews: 12,
+      recentTrend: 'up',
     },
     staffRiskLevel: 'low',
     alerts: 1,
@@ -89,7 +89,7 @@ const locations = [
       google: 4.1,
       yelp: 3.8,
       facebook: 4.0,
-      recentReviews: -3,
+      recentTrend: 'down',
     },
     staffRiskLevel: 'medium',
     alerts: 4,
@@ -169,13 +169,13 @@ const LocationsOverview: React.FC = () => {
                     </span>
                   </div>
                   <div className="flex items-center text-sm">
-                    {location.reputation.recentReviews > 0 ? (
-                      <ArrowTrendingUpIcon className="h-4 w-4 text-green-500 mr-1" />
+                    {location.reputation.recentTrend === 'up' ? (
+                      <ArrowTrendingUpIcon className="h-4 w-4 text-green-500 mr-1" title="Improving trend in last 30 days" />
                     ) : (
-                      <ArrowTrendingDownIcon className="h-4 w-4 text-red-500 mr-1" />
+                      <ArrowTrendingDownIcon className="h-4 w-4 text-red-500 mr-1" title="Declining trend in last 30 days" />
                     )}
-                    <span className={location.reputation.recentReviews > 0 ? 'text-green-500' : 'text-red-500'}>
-                      {Math.abs(location.reputation.recentReviews)} in 30 days
+                    <span className={location.reputation.recentTrend === 'up' ? 'text-green-500' : 'text-red-500'}>
+                      in 30 days
                     </span>
                   </div>
                 </div>

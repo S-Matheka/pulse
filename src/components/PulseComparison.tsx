@@ -13,14 +13,6 @@ interface LocationScore {
 const PulseComparison: React.FC = () => {
   const locations: LocationScore[] = [
     {
-      name: 'Atlanta Medical Center',
-      type: 'current',
-      overallRating: 4.5,
-      googleRating: 4.7,
-      yelpRating: 4.3,
-      facebookRating: 4.6
-    },
-    {
       name: 'Midtown Clinic',
       type: 'peer',
       overallRating: 4.3,
@@ -64,8 +56,6 @@ const PulseComparison: React.FC = () => {
 
   const getTypeLabel = (type: string) => {
     switch (type) {
-      case 'current':
-        return 'Your Location';
       case 'peer':
         return 'Peer Clinic';
       case 'competitor':
@@ -77,8 +67,6 @@ const PulseComparison: React.FC = () => {
 
   const getTypeStyles = (type: string) => {
     switch (type) {
-      case 'current':
-        return 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300';
       case 'peer':
         return 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300';
       case 'competitor':
@@ -104,7 +92,7 @@ const PulseComparison: React.FC = () => {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
       <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-        Reputation Score Comparison
+        Comparison Locations
       </h2>
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">

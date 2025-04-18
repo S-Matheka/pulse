@@ -17,12 +17,6 @@ const OperationalRiskFeed: React.FC = () => {
       timeframe: 'Last 30 days'
     },
     {
-      phrase: 'Rude front desk',
-      mentionCount: 32,
-      percentageChange: 15,
-      timeframe: 'Last 30 days'
-    },
-    {
       phrase: 'Prescription delays',
       mentionCount: 28,
       percentageChange: -12,
@@ -38,6 +32,18 @@ const OperationalRiskFeed: React.FC = () => {
       phrase: 'Billing issues',
       mentionCount: 22,
       percentageChange: -8,
+      timeframe: 'Last 30 days'
+    },
+    {
+      phrase: 'Appointment scheduling',
+      mentionCount: 32,
+      percentageChange: 15,
+      timeframe: 'Last 30 days'
+    },
+    {
+      phrase: 'Insurance verification',
+      mentionCount: 19,
+      percentageChange: -5,
       timeframe: 'Last 30 days'
     }
   ];

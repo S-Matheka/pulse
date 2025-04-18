@@ -132,18 +132,20 @@ const ReputationOverview: React.FC = () => {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <span className="text-sm text-gray-500 dark:text-gray-400">Total Reviews</span>
-              <p className="text-lg font-semibold text-gray-900 dark:text-white">
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">
                 {stats.totalReviews}
               </p>
             </div>
             <div>
               <span className="text-sm text-gray-500 dark:text-gray-400">Recent</span>
-              <div className="flex items-center space-x-2">
-                <span className="text-sm font-medium text-success-500">
-                  +{stats.recentPositive}
+              <div className="flex flex-col space-y-1">
+                <span className="text-lg font-semibold text-success-500">
+                  {stats.recentPositive} 
+                  <span className="text-sm font-normal">(4+ Stars)</span>
                 </span>
-                <span className="text-sm font-medium text-danger-500">
-                  -{stats.recentNegative}
+                <span className="text-lg font-semibold text-danger-500">
+                  {stats.recentNegative} 
+                  <span className="text-sm font-normal">(3 or Fewer Stars)</span>
                 </span>
               </div>
             </div>
